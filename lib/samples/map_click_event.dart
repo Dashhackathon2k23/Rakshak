@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:hackathonapplication/utils/Palette.dart';
+import 'package:hackathonapplication/app/Palette.dart';
 
 import 'package:mapmyindia_gl/mapmyindia_gl.dart';
 
@@ -25,7 +25,7 @@ class MapClickEventState extends State {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Palette.colorPrimary,
+        backgroundColor: Palette.red,
         title:const Text(
           'Map Click',
           style: TextStyle(color: Colors.white),

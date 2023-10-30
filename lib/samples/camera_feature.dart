@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:hackathonapplication/utils/Palette.dart';
+import 'package:hackathonapplication/app/Palette.dart';
 import 'package:mapmyindia_gl/mapmyindia_gl.dart';
 
 
@@ -42,7 +42,7 @@ class CameraFeatureState extends State {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Palette.colorPrimary,
+          backgroundColor: Palette.red,
           title: const Text(
             'Camera Feature',
             style: TextStyle(color: Colors.white),

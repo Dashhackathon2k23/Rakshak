@@ -17,6 +17,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     return TextFormField(
       decoration: InputDecoration(
         hintText: widget.hintText,
+
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:hackathonapplication/utils/Palette.dart';
+import 'package:hackathonapplication/app/Palette.dart';
 import 'package:mapmyindia_gl/mapmyindia_gl.dart';
 
 class AddMarkerWidget extends StatefulWidget {
@@ -11,8 +11,9 @@ class AddMarkerWidget extends StatefulWidget {
   }
 }
 
+
 class AddMarkerState extends State {
-    CameraPosition _kInitialPosition = CameraPosition(
+    final CameraPosition _kInitialPosition = const CameraPosition(
     target: LatLng(21.2466, 72.8312),
     zoom: 14.0,
   );
@@ -24,7 +25,7 @@ class AddMarkerState extends State {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Palette.colorPrimary,
+        backgroundColor: Palette.red,
         title: const Text(
           'Add Marker',
           style: TextStyle(color: Colors.white),

@@ -37,6 +37,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   mapmyindia_gl: ^0.3.2
   fluttertoast: ^8.0.6
+  bot_toast:
+  stacked_services:
+  shared_preferences:
+  internet_connection_checker:
+  universal_platform:
+  cached_network_image:
+  pinput: ^3.0.1
+  carousel_slider: ^4.2.1
+  flutter_custom_cards: ^0.2.1
 
 
 dev_dependencies:
@@ -57,7 +66,7 @@ flutter:
 
 
   assets:
-    - assets/symbols/custom-icon.png
+    - assets/symbols/
     #    - assets/symbols/2.0x/custom-icon.png
     #    - assets/symbols/3.0x/custom-icon.png
 

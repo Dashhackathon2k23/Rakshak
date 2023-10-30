@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hackathonapplication/samples/camera_feature.dart';
 import 'package:hackathonapplication/samples/map_click_event.dart';
-import 'package:hackathonapplication/utils/Palette.dart';
+import 'package:hackathonapplication/app/Palette.dart';
 import 'package:hackathonapplication/utils/feature_type.dart';
 import 'package:mapmyindia_gl/mapmyindia_gl.dart';
 
-class Homescreenmap extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   static const String MAP_SDK_KEY = "";
   static const String REST_API_KEY = "";
   static const String ATLAS_CLIENT_ID = "";
@@ -14,10 +14,10 @@ class Homescreenmap extends StatefulWidget {
   FeatureType? selectedFeatureType;
 
   @override
-  State<Homescreenmap> createState() => _HomescreenmapState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomescreenmapState extends State<Homescreenmap> {
+class _HomeScreenState extends State<HomeScreen> {
   static const CameraPosition _kInitialPosition = CameraPosition(
     target: LatLng(25.321684, 82.987289),
     zoom: 10.0,
@@ -106,7 +106,7 @@ class _HomescreenmapState extends State<Homescreenmap> {
                     child: Icon(
                       Icons.notifications_none_outlined,
                       size: 30,
-                      color: Palette.commoncolor,
+                      color: Palette.commonColor,
                     ),
                   ),
                   title: const Text('Notification',
@@ -128,7 +128,7 @@ class _HomescreenmapState extends State<Homescreenmap> {
                     child: Icon(
                       Icons.notifications_none_outlined,
                       size: 30,
-                      color: Palette.commoncolor,
+                      color: Palette.commonColor,
                     ),
                   ),
                   title: const Text('Account & Subscription',
@@ -143,105 +143,7 @@ class _HomescreenmapState extends State<Homescreenmap> {
                 const SizedBox(
                   height: 15,
                 ),
-                Column(children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20))),
-                    height: 70,
-                    width: 350,
-                    child:  Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
 
-                        Container(
-                          margin:const  EdgeInsets.fromLTRB(15,  0, 0, 0),
-                          width: 260,
-                          child:const Text("Puna Gam Fire Station , sdsdsdsdsdsdsdsdssd",
-                              maxLines: 2,
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontFamily: "Gilroy")),
-                        ),
-                        // SizedBox(
-                        //
-                        //   child: Text("Puna Gam Fire Station,",
-                        //       maxLines: 2,
-                        //       style: TextStyle(
-                        //
-                        //           fontSize: 14,
-                        //           color: Colors.white,
-                        //           fontFamily: "Gilroy")),
-                        // ),
-                        // ),
-                        // Spacer(flex: 20),
-
-                          // width: 90,
-                          const Icon(Icons.local_fire_department,
-                              size: 40, color: Colors.white),
-
-                        // Spacer(flex: 20),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Colors.lightBlueAccent,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
-                    height: 130,
-                    width: 350,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("\n\t Puna gam Fire Station",
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 15,
-                                fontFamily: "Gilroy",
-                                fontWeight: FontWeight.bold)),
-                        RichText(
-                          text: const TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: "\t\t Phone :",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: "Gilroy")),
-                              TextSpan(
-                                  text: "111-222-3333",
-                                  style: TextStyle(
-                                      fontFamily: "Gilroy",
-                                      fontWeight: FontWeight.w500)),
-                            ],
-                          ),
-                        ),
-                        RichText(
-                          text: const TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: "\t Address :",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: "Gilroy")),
-                              TextSpan(
-                                  text:
-                                      "6V4Q+R29, Unnamed Road,Vrundavan Society,Yoginagar Society, Surat, Gujarat 395010",
-                                  style: TextStyle(
-                                    fontFamily: "Gilroy",
-                                    fontWeight: FontWeight.w500,
-                                  )),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ])
               ],
             ),
           ),
