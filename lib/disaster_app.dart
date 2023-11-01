@@ -6,11 +6,13 @@ import 'package:flutter/services.dart';
 import 'package:hackathonapplication/app/globals.dart';
 import 'package:hackathonapplication/auth/Splash_screen.dart';
 import 'package:hackathonapplication/auth/login_screen.dart';
+import 'package:hackathonapplication/provider/authprovider.dart';
 import 'package:hackathonapplication/screen/HomeScreenMap.dart';
 import 'package:hackathonapplication/screen/adrress&service_screen.dart';
 import 'package:hackathonapplication/utils/context_ext.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:http/http.dart' as http;
 
 class DisasterApp extends StatefulWidget {
   const DisasterApp({Key? key}) : super(key: key);
@@ -44,25 +46,30 @@ class DisasterAppState extends State<DisasterApp> {
   Widget build(BuildContext context) {
     final botToastBuilder = BotToastInit();
 
-    return MaterialApp(
-      title: "Si Eclipse",
-      debugShowCheckedModeBanner: false,
-      // theme: Palette.lightTheme,
-      // darkTheme: Palette.darkTheme,
-      // themeMode: context.watch<ThemeProvider>().isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      navigatorKey: StackedService.navigatorKey,
-      navigatorObservers: [BotToastNavigatorObserver()],
-      builder: (context, child) {
-        screenWidth = MediaQuery.of(context).size.width;
-        screenHeight = MediaQuery.of(context).size.height;
-        child = myBuilder(context, child!); //do something
-        child = botToastBuilder(context, child);
-        SystemChrome.setSystemUIOverlayStyle(
-            context.isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
-        return child;
-      },
-      // onGenerateRoute: AppRoutes.obtainRoute,
-      home: const PreLoader(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthProvider(),)
+      ],
+      child: MaterialApp(
+        title: "Si Eclipse",
+        debugShowCheckedModeBanner: false,
+        // theme: Palette.lightTheme,
+        // darkTheme: Palette.darkTheme,
+        // themeMode: context.watch<ThemeProvider>().isDarkMode ? ThemeMode.dark : ThemeMode.light,
+        navigatorKey: StackedService.navigatorKey,
+        navigatorObservers: [BotToastNavigatorObserver()],
+        builder: (context, child) {
+          screenWidth = MediaQuery.of(context).size.width;
+          screenHeight = MediaQuery.of(context).size.height;
+          child = myBuilder(context, child!); //do something
+          child = botToastBuilder(context, child);
+          SystemChrome.setSystemUIOverlayStyle(
+              context.isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
+          return child;
+        },
+        // onGenerateRoute: AppRoutes.obtainRoute,
+        home: const PreLoader(),
+      ),
     );
   }
 }
@@ -85,6 +92,6 @@ class PreLoaderState extends State<PreLoader> {
 
   @override
   Widget build(BuildContext context) {
-    return  HomeScreen();
+    return  const SplashScreen();
   }
 }

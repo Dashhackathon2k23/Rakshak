@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackathonapplication/app/Palette.dart';
 import 'package:hackathonapplication/app/dimensions.dart';
+import 'package:hackathonapplication/provider/authprovider.dart';
 import 'package:hackathonapplication/widgets/base_scaffold.dart';
 import 'package:hackathonapplication/widgets/button_widgets.dart';
 import 'package:hackathonapplication/widgets/text_field_widget.dart';
 import 'package:hackathonapplication/widgets/text_widget.dart';
 import 'package:pinput/pinput.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,8 +23,19 @@ class _LoginScreenState extends State<LoginScreen> {
   final pinController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  String mpinValue="";
+  late AuthProvider authProvider;
+
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    authProvider=context.read<AuthProvider>();
+
+
+  }
   Widget build(BuildContext context) {
+    authProvider=context.watch<AuthProvider>();
     return BaseScaffold(
       hasBack: false,
       hasAppbar: false,
@@ -97,7 +111,13 @@ class _LoginScreenState extends State<LoginScreen> {
         hintStyle: const TextStyle(color: Colors.black38, fontSize: 17),
         style: const TextStyle(color: Colors.black45, fontSize: 20),
         maxLength: 10,
-        validator: (value) {},
+        validator: (value) {
+          if(value!.isEmpty){
+            return "enter a phone number";
+          }else{
+            return null;
+          }
+        },
       ),
     );
   }
@@ -118,7 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
       length: 4,
       forceErrorState: true,
       controller: pinController,
-      onCompleted: (value) {},
+      onCompleted: (value) {
+        setState(() {
+          mpinValue=value;
+        });
+      },
       defaultPinTheme: PinTheme(
         width: 56,
         height: 56,
@@ -143,7 +167,11 @@ class _LoginScreenState extends State<LoginScreen> {
       height: 55,
       width: 271,
       onTap: () {
-        if (formKey.currentState!.validate()) {}
+        if (formKey.currentState!.validate()) {
+          authProvider.loginApi(MPIN: mpinValue, number: tcNumber.text).then((value){
+            print("login sucess");
+          });
+        }
       },
       text: 'LOGIN',
     );
@@ -158,5 +186,16 @@ class _LoginScreenState extends State<LoginScreen> {
       textDecoration: TextDecoration.underline,
       color: Palette.white,
     );
+  }
+
+  Future<void> LoginApi() async {
+    Map map= {
+      "number":"+91${tcNumber.text}",
+      "MPIN":mpinValue
+    };
+    var url = Uri.parse("https://rakshak-dev.onrender.com/api/v1/users/login");
+    var response = await http.post(url, body: mpinValue);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
   }
 }

@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:hackathonapplication/app/dimensions.dart';
 import 'package:hackathonapplication/app/Palette.dart';
+import 'package:hackathonapplication/auth/login_screen.dart';
+import 'package:hackathonapplication/auth/mobile_number_screen.dart';
+import 'package:hackathonapplication/auth/signup_screen.dart';
 import 'package:hackathonapplication/widgets/base_scaffold.dart';
 import 'package:hackathonapplication/widgets/button_widgets.dart';
 import 'package:hackathonapplication/widgets/text_widget.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  static SharedPreferences? pref;
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool login=false;
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPrefrences();
+  }
+
   Widget build(BuildContext context) {
     return BaseScaffold(
       hasAppbar: false,
@@ -60,7 +74,13 @@ class _SplashScreenState extends State<SplashScreen> {
       fontWeight: FontWeight.bold,
       height: 55,
       width: 271,
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const SignUPScreen();
+          },
+        ));
+      },
       text: 'SIGN UP',
     );
   }
@@ -74,7 +94,13 @@ class _SplashScreenState extends State<SplashScreen> {
       fontWeight: FontWeight.bold,
       height: 55,
       width: 271,
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const LoginScreen();
+          },
+        ));
+      },
       text: 'LOGIN',
     );
   }
@@ -91,5 +117,13 @@ class _SplashScreenState extends State<SplashScreen> {
       onTap: () {},
       text: 'Skip',
     );
+  }
+
+  Future<void> getPrefrences() async {
+    SplashScreen.pref = await SharedPreferences.getInstance();
+    login=SplashScreen.pref!.getBool("loginOrSignup")??false;
+    setState(() {
+
+    });
   }
 }
